@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the res.partner form view -->
+        <record id="view_partner_form_inherited" model="ir.ui.view">
+            <field name="name">res.partner.form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <field name="is_a_salesperson" invisible="1"/>
+                    <button name="sold_items" type="object" class="oe_stat_button" icon="fa-list" string="Sell Out Report" invisible="is_a_salesperson != False or is_doctor != False"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="visit" type="object" class="oe_stat_button" icon="fa-hourglass" string="Visits" invisible="is_a_salesperson != False or is_doctor != False">
+                        <label for="crm_lead_count" string="Visits"/>
+                        <div>
+                            <field name="crm_lead_count"/>
+                        </div>
+                    </button>
+                    <button name="visit_salesperson" type="object" class="oe_stat_button" icon="fa-hourglass" string="Visits" invisible="is_a_salesperson != True">
+                        <label for="salesperson_visit_count" string="Visits"/>
+                        <div>
+                            <field name="salesperson_visit_count"/>
+                        </div>
+                    </button>
+                    <button name="salesperson_target" type="object" class="oe_stat_button" icon="fa-bullseye" string="Salesperson Target" invisible="is_a_salesperson != True"/>
+
+
+                </xpath>
+
+                <!-- Hide the phone field -->
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button string="Reset To Draft" name="draft" type="object" invisible="(status != 'f_approve') or (is_a_salesperson != False) or (is_doctor != False)"
+                                class="oe_highlight"/>
+                        <button string="Operational Approve" name="operational_approve" invisible="(status != 'draft') or (is_a_salesperson != False) or (is_doctor != False)" type="object"
+                                class="oe_highlight"/>
+                        <button string="Verify" name="finance_approve" invisible="status != 'o_approve'" type="object"
+                                class="oe_highlight"/>
+                        <field name="status" widget="statusbar" statusbar_visible="draft,o_approve,f_approve" invisible="is_a_salesperson != False or is_doctor != False"/>
+                    </header>
+                </xpath>
+
+
+                <xpath expr="//field[@name='company_type']" position="after">
+                    <group col="2">
+                        <group>
+                            <field name="reference"/>
+                        </group>
+                        <group>
+                            <field name="date" string="Date" widget="date"/>
+                            <field name="not_write" invisible="1"/>
+                        </group>
+                    </group>
+
+                </xpath>
+                <xpath expr="//div[hasclass('mb24')]" position="after">
+
+                    <group col="3">
+                        <group>
+                            <field name="is_doctor" invisible="0"/>
+                        </group>
+                        <group>
+                            <field name="is_a_salesperson" invisible="0"/>
+                        </group>
+                        <group>
+                            <field name="is_a_customer"/>
+                        </group>
+                    </group>
+                    <group col="3">
+                        <group>
+                            <field name="is_a_vendor" invisible="0"/>
+                        </group>
+                        <group>
+                            <field name="is_a_hospital"/>
+                        </group>
+                        <group>
+                            <field name="is_a_clinic"/>
+                        </group>
+
+                    </group>
+                    <group col="1">
+                        <group>
+                            <field name="customer_validate" invisible="is_a_salesperson != False or is_doctor != False"/>
+                        </group>
+
+                    </group>
+
+                    <group col="2">
+                        <group>
+                            <field name="tax_registration_number" invisible="is_a_salesperson != False or is_doctor != False"/>
+                        </group>
+                        <group>
+                            <field name="trade_license_number" invisible="is_a_salesperson != False or is_doctor != False"/>
+                        </group>
+
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="sponsor" invisible="is_a_salesperson != False or is_doctor != False"/>
+                        </group>
+                        <group>
+                            <field name="date_of_establishment" widget="date" invisible="is_a_salesperson != False or is_doctor != False"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='property_supplier_payment_term_id']" position="after">
+                    <field name="is_a_vendor" invisible="is_a_salesperson != False or is_doctor != False"/>
+
+                </xpath>
+                <xpath expr="//field[@name='property_payment_term_id']" position="after">
+                    <field name="is_a_customer" invisible="is_a_salesperson != False or is_doctor != False"/>
+                    <field name="is_doctor" invisible="is_a_salesperson != False"/>
+
+                </xpath>
+                <!--                <xpath expr="//div[hasclass('o_address_format')]" position="after">-->
+                <xpath expr="//notebook" position="before">
+
+                    <group col="2">
+                        <group>
+                            <field name="proprietor" invisible="is_a_salesperson != False or is_doctor != False"/>
+                        </group>
+                        <group>
+                            <field name="customer_territory" invisible="is_a_salesperson != False or is_doctor != False"/>
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="nationality"/>
+                        </group>
+                        <group>
+                            <field name="emirates_id"/>
+                        </group>
+                    </group>
+
+                </xpath>
+<!--                <xpath expr="//field[@name='child_ids']" position="attributes">-->
+<!--                    <attribute name="domain">[('active', '=', True), ('is_doctor','=', True)]</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//button[@name='create_company']" position="attributes">
+                    <attribute name="invisible">
+                        1
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='function']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='mobile']" position="attributes">
+                    <attribute name="string">Telephone</attribute>
+                </xpath>
+                <xpath expr="//field[@name='website']" position="after">
+                    <field name="fax"/>
+                </xpath>
+                <xpath expr="//page[@name='contact_addresses']" position="before">
+                    <page string="Geolocation" name="partner_geolocation" invisible="is_a_salesperson != False or is_doctor != False">
+                        <group col="2">
+                            <group>
+                                <field name="partner_latitude"/>
+                            </group>
+                            <group>
+                                <field name="partner_longitude"/>
+                            </group>
+                        </group>
+
+                    </page>
+                    <page string="Account Information" name="account_information" invisible="is_a_salesperson != False or is_doctor != False">
+                        <group col="2">
+                            <group>
+                                <field name="name_of_the_bank"/>
+                            </group>
+                            <group>
+                                <field name="branch"/>
+                            </group>
+                        </group>
+                        <group col="2">
+                            <group>
+                                <field name="account_no"/>
+                            </group>
+                            <group>
+                                <field name="iban_no"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="vat_id"/>
+                            </group>
+                        </group>
+
+                        <group string="Authorised Signatory on behalf of the company" col="1">
+                            <group col="2">
+                                <group>
+                                    <field name="name1"/>
+                                </group>
+                                <group>
+                                    <field name="signature_stamp1"/>
+                                </group>
+                            </group>
+                            <group col="2">
+                                <group>
+                                    <field name="name2"/>
+                                </group>
+                                <group>
+                                    <field name="signature_stamp2"/>
+                                </group>
+                            </group>
+                            <group col="2">
+                                <group>
+                                    <field name="name3"/>
+                                </group>
+                                <group>
+                                    <field name="signature_stamp3"/>
+                                </group>
+                            </group>
+                            <group string="Credit Facility">
+                                <group>
+                                    <field name="credit_limit"/>
+                                    <field name="post_restriction_on_credit"/>
+                                </group>
+
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Terms and Conditions" name="terms_and_conditions" autofocus="autofocus" invisible="is_a_salesperson != False or is_doctor != False">
+                        <h3>Terms of Sale:</h3>
+                        <ol>
+                            <li>All goods should be counted at the time of delivery and duly signed &amp; stamped on the
+                                copy.
+                            </li>
+                            <li>Nova Care Trading LLC shall not be responsible for any discrepancy after the delivery.
+                            </li>
+                            <li>Payment should be made as per the credit terms agreed with Nova Care Trading LLC.</li>
+                            <li>Payment shall be made in favor of Nova Care Trading LLC Only.</li>
+                            <li>Signature of the applicant will signify the acceptance of the credit period and credit
+                                limit set by Nova Care Trading LLC.
+                            </li>
+                        </ol>
+
+                        <h3>Credit Terms:</h3>
+                        <p>In consideration of Credit facility being granted, the Customer/Company hereby undertakes to
+                            comply strictly with the following Credit terms:
+                        </p>
+                        <ol>
+                            <li>All dues shall be settled within a credit period of _______ days.</li>
+                            <li>All discrepancies appearing in the invoice or statement of account, as the case may be,
+                                should be communicated to Nova Care Trading LLC within 7 days from the date of the
+                                invoice or statement of account date.
+                            </li>
+                            <li>The credit facility is not transferable and should not be further assigned to any third
+                                party.
+                            </li>
+                            <li>The Customer/Company is required to provide true and accurate information for Nova Care
+                                Trading LLC assessment. Nova Care Trading LLC reserves the right to claim should any
+                                fraudulent information be submitted.
+                            </li>
+                        </ol>
+                    </page>
+                    <page string="Declaration" name="declaration" invisible="is_a_salesperson != False or is_doctor != False">
+                        <p>
+                            We undertake to settle your invoices as per the credit terms. in the event that payment is
+                            not made by the due date, we agreed that Nova Care Trading LLC has right to take goods
+                            supplied
+                            and / or proceed with any legal action necessary to recover the outstanding amount.
+                        </p>
+                        <group>
+                            <group col="2">
+                                <group>
+                                    <field name="signature_of_local_owner"/>
+                                </group>
+                                <group>
+                                    <field name="signature_of_local_owner_date"/>
+                                </group>
+                            </group>
+                        </group>
+                        <group>
+                            <group col="2">
+                                <group>
+                                    <field name="signature_of_local_manager"/>
+                                </group>
+                                <group>
+                                    <field name="signature_of_local_manager_date"/>
+                                </group>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="company_stamp" widget="image"/>
+                            </group>
+                        </group>
+
+                    </page>
+                    <page string="Enclosures" name="enclosures" invisible="is_a_salesperson != False or is_doctor != False">
+                        <h3>Enclosures Required with Application:</h3>
+                        <ol>
+                            <li>Copy of trade license</li>
+                            <li>Passport &amp; EID copy of Local Owner</li>
+                            <li>Passport, Visa &amp; EID copy of authorized signatory on behalf of the company</li>
+                            <li>Copy of VAT Registration Certificate</li>
+                        </ol>
+
+                    </page>
+
+                    <page string="For Office Use Only" name="for_office_use_only" invisible="is_a_salesperson != False or is_doctor != False">
+                        <group col="3">
+                            <group>
+                                <field name="credit_limit"/>
+                            </group>
+                            <group>
+                                <field name="credit_period"/>
+                            </group>
+                            <group>
+                                <field name="days"/>
+                            </group>
+
+                        </group>
+                        <group col="3">
+                            <group>
+                                <field name="sales_department"/>
+                            </group>
+                            <group>
+                                <field name="sales_manager"/>
+                            </group>
+                            <group>
+                                <field name="finance_dept"/>
+                            </group>
+
+                        </group>
+
+                    </page>
+                    <page string="Linked Doctors" name="linked_doctors"
+                          invisible="is_a_salesperson != False or is_doctor != False">
+                        <group>
+                            <field name="child_ids" widget="many2many_tags"
+                                   domain="[('active', '=', True), ('is_doctor','=', True)]" string="Linked Doctors" invisible="1"/>
+                            <field name="doctor_ids" widget="many2many_tags" string="Linked Doctors" domain="[('active', '=', True), ('is_doctor','=', True)]"/>
+
+                        </group>
+
+                    </page>
+                    <page string="Linked Pharmacy/Hospital/Clinic" name="linked_pharmacy"
+                          invisible="is_doctor != True">
+                        <group>
+                            <field name="parent_id" string="Linked Pharmacy" invisible="1"/>
+                            <field name="pharmacy_ids" widget="many2many_tags" string="Linked Pharmacy / Hospital / Clinic" domain="['|', '|', ('is_a_hospital', '=', True), ('is_a_clinic', '=', True),('is_a_customer', '=', True)]"/>
+                        </group>
+
+                    </page>
+                    <page string="Allowed Pharmacy" name="allowed_brand_pharmacy"
+                          invisible="is_a_salesperson == False">
+                        <group>
+                            <field name="brand_ids" widget="many2many_tags"/>
+                            <field name="pharmacy_ids" widget="many2many_tags" string="Allowed Pharmacy" domain="[('active', '=', True), ('is_a_customer','=', True)]"/>
+                        </group>
+                    </page>
+                    <page string="Visit History" name="visit_history"
+                          invisible="1">
+                        <group>
+                            <field name="visit_ids" string=" ">
+                                <tree editable="bottom">
+                                    <field name="partner_id" invisible="0" string="Salesperson"/>
+                                    <field name="lead_id"/>
+                                    <field name="customer_id"/>
+                                    <field name="date"/>
+                                    <field name="stage_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_res_partner_search_inherited" model="ir.ui.view">
+            <field name="name">res.partner.search.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='type_person']" position="after">
+                    <filter string="Doctor" name="is_doctor" domain="[('is_doctor', '=', True)]"/>
+                    <filter string="Vendor" name="is_vendor" domain="[('is_a_vendor', '=', True)]"/>
+                    <filter string="Pharmacy" name="is_customer" domain="[('is_a_customer', '=', True)]"/>
+                    <filter string="Salesperson" name="is_a_salesperson" domain="[('is_a_salesperson', '=', True)]"/>
+                    <filter string="Hospital" name="is_a_hospital" domain="[('is_a_hospital', '=', True)]"/>
+                    <filter string="Clinic" name="is_a_clinic" domain="[('is_a_clinic', '=', True)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_tree_inherited" model="ir.ui.view">
+            <field name="name">res.partner.tree.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                <field name="status"/>
+            </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

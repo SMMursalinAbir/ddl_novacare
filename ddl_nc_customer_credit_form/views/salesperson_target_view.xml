@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_salesperson_target_form" model="ir.ui.view">
+            <field name="name">salesperson.target.form</field>
+            <field name="model">salesperson.target</field>
+            <field name="arch" type="xml">
+                <form string="Salesperson Target">
+                    <sheet>
+                        <group>
+                            <group col="2">
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="visit_target_manual"/>
+                                <field name="visit_target"/>
+                                <field name="total_visit"/>
+                            </group>
+                            <group>
+                                <field name="salesperson"/>
+                                <field name="expected_sales"/>
+                                <field name="expected_sales1" invisible="1"/>
+                                <field name="monthly_target"/>
+                                <field name="total_sold"/>
+                                <field name="total_sold1" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_salesperson_target_tree" model="ir.ui.view">
+            <field name="name">salesperson.target.tree</field>
+            <field name="model">salesperson.target</field>
+            <field name="arch" type="xml">
+                <tree string="Salesperson Targets">
+                    <field name="salesperson"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="visit_target_manual"/>
+                    <field name="visit_target"/>
+                    <field name="total_visit"/>
+                    <field name="expected_sales"/>
+                    <field name="monthly_target"/>
+                    <field name="total_sold"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_salesperson_target_pivot" model="ir.ui.view">
+            <field name="name">salesperson.target.pivot</field>
+            <field name="model">salesperson.target</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="salesperson"  type="row"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="expected_sales1" type="measure"/>
+                    <field name="monthly_target" type="measure"/>
+                    <field name="total_sold1" type="measure"/>
+                    <field name="visit_target1" type="measure"/>
+                    <field name="total_visit1" type="measure"/>
+                    <field name="visit_target_manual" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_salesperson_target" model="ir.actions.act_window">
+            <field name="name">Salesperson Targets</field>
+            <field name="res_model">salesperson.target</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="menu_salesperson_target" name="Salesperson Target" parent="crm.crm_menu_config"
+                  action="action_salesperson_target"/>
+    </data>
+</odoo>

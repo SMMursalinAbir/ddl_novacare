@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_generate_product_return_report_form" model="ir.ui.view">
+        <field name="name">generate.product.return.report.form</field>
+        <field name="model">generate.product.return.report</field>
+        <field name="arch" type="xml">
+            <form string="Generate Product Return Report">
+                <footer>
+                    <button name="action_product_return_report" string="Get Product Report" type="object"
+                            class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+
+    </record>
+    <record id="action_generate_product_return_report" model="ir.actions.act_window">
+        <field name="name">Generate Product Return Report</field>
+        <field name="res_model">generate.product.return.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_generate_product_return_report_wizard" name="Generate Product Return Report"
+              parent="stock.menu_warehouse_report" action="action_generate_product_return_report"
+              sequence="29"/>
+</odoo>

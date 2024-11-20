@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_lead_details_tree" model="ir.ui.view">
+        <field name="name">lead.details.tree</field>
+        <field name="model">lead.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="lead_name" string="Opportunity ID"/>
+                <field name="customer"/>
+                <field name="salesperson"/>
+                <field name="sales_team"/>
+                <field name="date"/>
+                <field name="sale_order_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_lead_details_form" model="ir.ui.view">
+        <field name="name">lead.details.form</field>
+        <field name="model">lead.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="lead_name" string="Opportunity ID"/>
+                        <field name="customer"/>
+                        <field name="salesperson"/>
+                        <field name="sales_team"/>
+                        <field name="date"/>
+                        <field name="sale_order_count"/>
+                        <!-- Add more fields here if needed -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lead_details_pivot" model="ir.ui.view">
+        <field name="name">lead.details.pivot</field>
+        <field name="model">lead.details</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="lead_name" type="row" string="Opportunity ID"/>
+                <field name="customer" type="row"/>
+                <field name="salesperson" type="row"/>
+                <field name="sales_team" type="row"/>
+                <field name="date" type="row"/>
+
+                <field name="sale_order_count1" type="measure"/>
+                <!-- Add more measures here if needed -->
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Window Action -->
+    <record id="action_lead_details" model="ir.actions.act_window">
+        <field name="name">Lead Details</field>
+        <field name="res_model">lead.details</field>
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
+
+    <!-- Menu -->
+
+    <menuitem id="menu_lead_details_sub" name="Visit Details" parent="contacts.res_partner_menu_config" action="action_lead_details"/>
+    <menuitem id="menu_lead_details_sub1" name="Visit Details" parent="crm.crm_menu_report" action="action_lead_details"/>
+</odoo>

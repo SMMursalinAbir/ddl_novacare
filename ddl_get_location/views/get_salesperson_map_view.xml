@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_salesperson_map_form" model="ir.ui.view">
+        <field name="name">crm.salesperson.form</field>
+        <field name="model">crm.salesperson</field>
+        <field name="arch" type="xml">
+            <form string="Salesperson Map">
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_salesperson_map_tree" model="ir.ui.view">
+        <field name="name">crm.salesperson.tree</field>
+        <field name="model">crm.salesperson</field>
+        <field name="arch" type="xml">
+            <tree string="Salesperson Map">
+                <field name="partner_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_salesperson_map_map" model="ir.ui.view">
+        <field name="name">crm.salesperson.map</field>
+        <field name="model">crm.salesperson</field>
+        <field name="arch" type="xml">
+            <map res_partner="partner_id" routing="true"
+                 hide_name="true">
+                <field name="partner_id" string="Salesperson"/>
+            </map>
+        </field>
+    </record>
+
+
+    <record id="action_view_salesperson" model="ir.actions.act_window">
+        <field name="name">Salesperson Location</field>
+        <field name="res_model">crm.salesperson</field>
+        <field name="view_mode">map</field>
+    </record>
+
+
+
+<!--    <menuitem id="menu_salesperson" name="Salesperson" parent="crm.crm_menu_config"-->
+<!--              action="action_view_salesperson"/>-->
+</odoo>

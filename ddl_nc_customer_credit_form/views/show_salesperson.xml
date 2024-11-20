@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_show_salesperson" model="ir.actions.act_window">
+        <field name="name">Salesperson</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('is_a_salesperson', '=', True)]</field>
+    </record>
+
+    <menuitem id="show_salesperson_menu" name="Salesperson" parent="crm.crm_menu_config"
+                  action="action_show_salesperson"/>
+
+</odoo>

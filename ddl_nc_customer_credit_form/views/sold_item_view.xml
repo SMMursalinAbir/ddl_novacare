@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- View for Sold Item Model (Form View) -->
+        <record id="view_sold_item_form" model="ir.ui.view">
+            <field name="name">sold.item.form</field>
+            <field name="model">sold.item</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="customer"/>
+                            <field name="salesperson_id"/>
+                            <field name="invoice_no"/>
+                            <field name="invoice_origin"/>
+                            <field name="invoice_line_id"/>
+                            <field name="invoice_date"/>
+                            <field name="delivery_date"/>
+                            <field name="product_id"/>
+                            <field name="product_label"/>
+                            <field name="product_lot_numder"/>
+                            <field name="expire_date"/>
+                            <field name="removal_date"/>
+                            <field name="quantity"/>
+                            <field name="price_unit"/>
+                            <field name="pharmacy_sold_quantity"/>
+                            <field name="recommended_by"/>
+                            <field name="recommended_quantity"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- View for Sold Item Model (Tree View) -->
+        <record id="view_sold_item_tree" model="ir.ui.view">
+            <field name="name">sold.item.tree</field>
+            <field name="model">sold.item</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="customer" readonly="True"/>
+                    <field name="salesperson_id"/>
+                    <field name="invoice_no" readonly="True"/>
+                    <field name="invoice_origin" readonly="True"/>
+                    <field name="invoice_date" readonly="True"/>
+                    <field name="delivery_date" readonly="True" />
+                    <field name="expire_date"/>
+                    <field name="removal_date"/>
+                    <field name="product_id" readonly="True"/>
+                    <field name="product_label" readonly="True"/>
+                    <field name="product_lot_numder"/>
+                    <field name="quantity" readonly="True"/>
+                    <field name="price_unit" readonly="True"/>
+                    <field name="pharmacy_sold_quantity"/>
+                    <field name="recommended_by"/>
+                    <field name="recommended_quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sold_item_kanban" model="ir.ui.view">
+            <field name="name">sold.item.kanban</field>
+            <field name="model">sold.item</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <!-- Customize the content of the Kanban box as needed -->
+                                <b><p>Invoice&#160;:&#160;<field name="invoice_no"/></p></b>
+                                <p>Customer&#160;:&#160;<field name="customer"/></p>
+                                <p>Product&#160;:&#160;<field name="product_id"/></p>
+                                <p>Sold Quantity&#160;:&#160;<field name="quantity"/></p>
+                                <p>Dr Recommended&#160;:&#160;<field name="recommended_by"/></p>
+                                <p>Recommended Quantity&#160;:&#160;<field name="recommended_quantity"/></p>
+                                <!-- Add more fields as needed -->
+                            </div>
+
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- View for Sold Item Model (Pivot View) -->
+        <record id="view_sold_item_pivot" model="ir.ui.view">
+            <field name="name">sold.item.pivot</field>
+            <field name="model">sold.item</field>
+            <field name="arch" type="xml">
+                <pivot string="Sold Items Pivot">
+                    <field name="salesperson_id" type="row"/>
+                    <field name="customer" type="row" />
+                    <field name="product_id" type="row" />
+                    <field name="recommended_by" type="row" />
+                    <field name="recommended_quantity" type="measure" />
+                    <field name="pharmacy_sold_quantity" type="measure" />
+                    <field name="quantity" type="measure" />
+                    <field name="price_unit" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Action for Sold Item Model -->
+        <record id="action_sold_item" model="ir.actions.act_window">
+            <field name="name">Sold Items</field>
+            <field name="res_model">sold.item</field>
+            <field name="view_mode">tree,form,kanban,pivot</field>
+        </record>
+
+        <!-- Menu for Sold Items -->
+
+        <menuitem id="menu_sold_items_action" name="Sell Out Items" parent="contacts.res_partner_menu_config"
+                  action="action_sold_item"/>
+        <menuitem id="menu_sold_items_action1" name="Sell Out Items" parent="sale.menu_sale_report"
+                  action="action_sold_item"/>
+        <menuitem id="menu_sold_items_action2" name="Sell Out Items" parent="crm.crm_menu_report"
+                  action="action_sold_item"/>
+    </data>
+</odoo>

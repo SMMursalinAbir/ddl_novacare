@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_header_footer">
+        <div class="header first-page" style="width:95%; margin-left:auto; margin-right:auto;">
+            <img src="ddl_nc_customer_credit_form/static/src/img/header2.png" style="object-fit:cover; margin:5px; height:85px; width:400px"/>
+            <img src="ddl_nc_customer_credit_form/static/src/img/header3.png" style="object-fit: cover; margin: 5px; height: 125px; width: 400px; float: right;"/>
+        </div>
+
+        <div class="article o_report_layout_standard">
+            <t t-out="0"/>
+        </div>
+        <div class="footer o_standard_footer last-page" style="background-color:#9c399a; margin-bottom: 0; height:100%; width:auto; margin-left:-5%; margin-right:-5%;">
+            <span style="font-size:9pt;">&#xa0;</span>
+            <div class="row">
+                <p style="text-align:center; color:#FFFFFF;">P.O.Box: 182338, Saheel Tower-1 Suite# 407 Al Nahda-1, Dubai - UAE. Tel : +971 4 2971727 <br/> Email: info@novacareme.com , web: www.novacareme.com</p>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_credit_application">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="ddl_nc_customer_credit_form.custom_header_footer">
+                    <div class="page">
+                        <table>
+                            <div class="row">
+                                <table style="float:left; font-size:14pt;" class="table-borderless">
+                                    <td style="padding-left:25px;">Ref Number:</td>
+                                    <td>
+                                        <span>&#xa0;&#xa0;</span>
+                                        <span t-field="o.reference"/>
+                                    </td>
+                                </table>
+                                <table class="table-borderless" style="float:right; font-size:14pt;">
+                                    <td>Date:</td>
+                                    <td style="padding-right:25px;">
+                                        <span>&#xa0;&#xa0;</span>
+                                        <span t-field="o.date"/>
+                                    </td>
+                                </table>
+                            </div>
+                        </table>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                            <tr>
+                                <td style="padding-right:5px; width:17%;">Company Name<br/>( Full Legal Name ) &#xa0; &#xa0;</td>
+                                <td style="border:1px solid; width:auto;">&#xa0;<span t-field="o.name"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                            <tr>
+                                <td style="padding-right:5px;  width:17%; ">Tax Registration Number</td>
+                                <td style="border:1px solid; padding-right:5px; padding-left:5px;"><span t-field="o.tax_registration_number"/>
+                                </td>
+                                <td style="padding-right:5px; padding-left:5px;  width:12%;">Trade License Number</td>
+                                <td style="border:1px solid;  padding-right:5px; padding-left:5px; width:21%;"><span t-field="o.trade_license_number"/>
+                                </td>
+                                <td style="padding-right:5px; padding-left:5px;  width:13%;">Date of Establishment</td>
+                                <td style="border:1px solid; padding-right:25px; padding-left:5px; width:20%; "><span t-field="o.date_of_establishment"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; height:30px; font-size:12pt; height:35px;" class="table-borderless">
+                            <tr>
+                                <td style=" width:17%; padding-right:5px; " >Name Of The Local Sponsor</td>
+                                <td style="border:1px solid; padding-left:5px;"><span t-field="o.sponsor"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px" class="table-borderless">
+                            <tr>
+                                <td style="width:17%;  padding-right:5px; ">Registered Address</td>
+                                <td style="border:1px solid;  padding-left:5px;"><span t-field="o.street"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px" class="table-borderless">
+                            <tr>
+                                <td style="width:17%;  padding-right:5px;">City</td>
+                                <td style="border:1px solid; padding-left:5px; width:17%;"><span t-field="o.city"/>
+                                </td>
+                                <td style="width:10%;  padding-right:5px; padding-left:5px;">Province / State</td>
+                                <td style="border:1px solid; padding-left:5px; width:23%; "><span t-field="o.state_id"/>
+                                </td>
+                                <td style="width:7%;  padding-right:5px; padding-left:6px;">Country</td>
+                                <td style="border:1px solid; padding-left:5px; width:24%;"><span t-field="o.country_id"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px" class="table-borderless">
+                            <tr>
+                                <td style="width:17%;  padding-right:5px;">Zip / Postal Code</td>
+                                <td style="width:17%; border:1px solid; padding-left:5px;"><span t-field="o.zip"/>
+                                </td>
+                                <td style="width:10%;  padding-right:5px; padding-left:5px;" >Telephone</td>
+                                <td style="width:23%; border:1px solid; padding-left:5px;"><span t-field="o.mobile"/>
+                                </td>
+                                <td style="width:5%;  padding-right:5px; padding-left:5px;">Fax</td>
+                                <td style="width:28%; border:1px solid; padding-left:5px;"><span t-field="o.fax"/></td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                            <tr>
+                                <td  style="width:17%;  padding-right:5px;">E-mail</td>
+                                <td style="width:33%; border:1px solid; padding-left:5px;"><span t-field="o.email"/>
+                                </td>
+                                <td style="width:8%;  padding-right:5px; padding-left:5px;">Website</td>
+                                <td style="width:42%; border:1px solid; padding-left:5px;"><span t-field="o.website"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                            <tr>
+                                <td  style="width:17%;  padding-right:5px;">Proprietor/Partner Full Name</td>
+                                <td style="border:1px solid; padding-left:5px;"><span t-field="o.sponsor"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                            <tr>
+                                <td  style="width:17%; padding-right:5px;">Nationality</td>
+                                <td style="width:33%; border:1px solid; padding-left:5px;"><span t-field="o.nationality"/>
+                                </td>
+                                <td style="width:11%;  padding-right:5px; padding-left:5px;">Emirates ID</td>
+                                <td style="width:39%; border:1px solid; padding-left:5px;"><span t-field="o.emirates_id"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/>
+                    <h3 style="color:#9c399a; padding-left:20px;">Account Information</h3>
+                    <br/>
+                    <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                        <tr>
+                            <td  style="width:17%;  padding-right:5px;">Name Of The Bank</td>
+                            <td style="border:1px solid; padding-left:5px;"><span t-field="o.name_of_the_bank"/>
+                            </td>
+                            <td style="width:7%;  padding-right:5px; padding-left:5px;">Branch</td>
+                            <td style="width:43%; border:1px solid; padding-left:5px;"><span t-field="o.branch"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                        <tr>
+                            <td  style="width:17%;  padding-right:5px;">Account No</td>
+                            <td style="width:33%; border:1px solid; padding-left:5px;"><span t-field="o.account_no"/>
+                            </td>
+                            <td style="width:9%;  padding-right:5px; padding-left:5px;">IBAN No</td>
+                            <td style="width:41%; border:1px solid; padding-left:5px;"><span t-field="o.iban_no"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <p style="padding-left:20px;">Authorised Signatory on behalf of the Company</p>
+                    <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                        <tr>
+                            <td  style="width:17%;  padding-right:5px;">1. Name</td>
+                            <td style="border:1px solid; padding-left:5px; width:33%;"><span t-field="o.name1"/>
+                            </td>
+                            <td style="width:17%;  padding-right:5px; padding-left:5px;">Signature &#38; Stamp</td>
+                            <td style="border:1px solid; padding-left:5px; width:33%;">
+                                <span t-if="o.signature_stamp1">
+                                    <!-- Your content when o.signature_stamp1 is not None -->
+                                    <span t-field="o.signature_stamp1" t-options='{"widget": "image"}' alt="Signature" />
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                        <tr>
+                            <td  style="width:17%;  padding-right:5px;">2. Name</td>
+                            <td style="border:1px solid; padding-left:5px;"><span t-field="o.name2"/>
+                            </td>
+                            <td style="width:17%;  padding-right:5px; padding-left:5px;">Signature &#38; Stamp</td>
+                            <td style="border:1px solid; padding-left:5px;">
+                                <span t-if="o.signature_stamp2">
+                                    <!-- Your content when o.signature_stamp1 is not None -->
+                                    <span t-field="o.signature_stamp2" t-options='{"widget": "image"}' alt="Signature" />
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                        <tr>
+                            <td  style="width:17%;  padding-right:5px;">3. Name</td>
+                            <td style="border:1px solid; padding-left:5px;"><span t-field="o.name3"/>
+                            </td>
+                            <td style="width:17%;  padding-right:5px; padding-left:5px;">Signature &#38; Stamp</td>
+                            <td style="border:1px solid; padding-left:5px;">
+                                <span t-if="o.signature_stamp3">
+                                    <!-- Your content when o.signature_stamp1 is not None -->
+                                    <span t-field="o.signature_stamp3" t-options='{"widget": "image"}' alt="Signature" />
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br/>
+                    <h3 style="color:#9c399a; padding-left:20px;">Credit Facility</h3>
+                    <table style="width:95%; margin-left:auto; margin-right:auto; font-size:12pt; height:35px;" class="table-borderless">
+                        <tr>
+                            <span style="padding-left:20px;">Credit Limit in AED</span>
+                            <td style="border:1px solid; width:58%; ">
+                                <span>&#xa0;</span>
+                                <span t-field="o.credit_limit"/>
+                            </td>
+                            <td style="width:2%;">
+                            </td>
+                             <td style="border:1px solid; width:23%;">
+                            </td>
+                            <td style="border:1px solid; width:12%;">
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <br/>
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+                    <h3 style="color:#9c399a; padding-left:20px;">Terms &#38; Conditions</h3>
+                    <br/>
+                    <h5 style="color:#9c399a; padding-left:20px;">Terms of Sale:</h5>
+                    <ol style="padding-left:20px;">
+                        <li style="font-size:12pt; ">All goods should be counted at the time of delivery and duly signed &amp; stamped on the
+                            copy.
+                        </li>
+                        <li style="font-size:12pt; ">Nova Care Trading LLC shall not be responsible for any discrepancy after the delivery.
+                        </li>
+                        <li style="font-size:12pt;">Payment should be made as per the credit terms agreed with Nova Care Trading LLC.</li>
+                        <li style="font-size:12pt;">Payment shall be made in favor of Nova Care Trading LLC Only.</li>
+                        <li style="font-size:12pt;">Signature of the applicant will signify the acceptance of the credit period and credit
+                            limit set by Nova Care Trading LLC.
+                        </li>
+                    </ol>
+
+                    <h5 style="color:#9c399a; padding-left:20px;">Credit Terms:</h5>
+                    <p style="font-size:12pt; padding-left:20px; padding-right:20px;">In consideration of Credit facility being granted, the Customer/Company hereby undertakes to
+                        comply strictly with the following Credit terms:
+                    </p>
+                    <ol style="padding-left:20px; padding-right:20px;">
+                        <li style="font-size:12pt;">All dues shall be settled within a credit period of _______ days.</li>
+                        <li style="font-size:12pt;">All discrepancies appearing in the invoice or statement of account, as the case may be,
+                            should be communicated to Nova Care Trading LLC within 7 days from the date of the
+                            invoice or statement of account date.
+                        </li>
+                        <li style="font-size:12pt;">The credit facility is not transferable and should not be further assigned to any third
+                            party.
+                        </li>
+                        <li style="font-size:12pt;">The Customer/Company is required to provide true and accurate information for Nova Care
+                            Trading LLC assessment. Nova Care Trading LLC reserves the right to claim should any
+                            fraudulent information be submitted.
+                        </li>
+                    </ol>
+                    <br/>
+                    <h3 style="color:#9c399a; padding-left:20px; padding-right:20px;">Declaration</h3>
+                    <p style="font-size:12pt; padding-left:20px; padding-right:20px;">
+                        We undertake to settle your invoices as per the credit terms. in the event that payment is
+                        not made by the due date, we agreed that Nova Care Trading LLC has right to take goods
+                        supplied
+                        and / or proceed with any legal action necessary to recover the outstanding amount.
+                    </p>
+
+                    <table style="width:95%; margin-left:auto; margin-right:auto; height:35px;  font-size:12pt;" class="table-borderless">
+                        <tr>
+                            <td style="width:18%; padding-right:5px;">Signature of Local Owner&#xa0;</td>
+                            <td style="border:1px solid; width:44%;">
+                                <span t-if="o.signature_of_local_owner">
+                                    <span t-field="o.signature_of_local_owner" t-options='{"widget": "image"}' />
+                                </span>
+                            </td>
+                            <td style="padding-right:5px; width:6%; padding-left:5px;">Date</td>
+                            <td style="border:1px solid; width:30%; padding-left:5px;"><span t-field="o.signature_of_local_owner_date"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+
+                    <table style="width:95%; margin-left:auto; margin-right:auto; height:35px;  font-size:12pt;" class="table-borderless">
+                        <tr>
+                            <td style="width:18%; padding-right:5px;">Signature of Local Manager&#xa0;</td>
+                            <td style="border:1px solid; width:44%;">
+                                <span t-if="o.signature_of_local_manager">
+                                    <span t-field="o.signature_of_local_manager" t-options='{"widget": "image"}' />
+                                </span>
+                            </td>
+                            <td style="padding-right:5px; width:6%; padding-left:5px;">Date</td>
+                            <td style="border:1px solid; width:30%; padding-left:5px;"><span t-field="o.signature_of_local_manager_date"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table style="width:95%; margin-left:auto; margin-right:auto; height:120px;  font-size:12pt;" class="table-borderless">
+                        <tr>
+                            <td style="width:18%; padding-right:5px;">Company Stamp</td>
+                            <td style="border:1px solid; width:44%;">
+                                <span t-if="o.company_stamp">
+                                    <span t-field="o.company_stamp" t-options='{"widget": "image"}' />
+                                </span>
+                            </td>
+                            <td style="padding-right:5px; width:6%; padding-left:5px;">&#xa0;</td>
+                            <td style="width:30%; padding-left:5px;">&#xa0;
+                            </td>
+                        </tr>
+                    </table>
+                    <h3 style="color:#9c399a; padding-left:20px;">Enclosures</h3>
+                    <p style="font-size:12pt; padding-left:20px;">Enclosures Required with Application:</p>
+                    <ol style="padding-left:20px;">
+                        <li style="font-size:12pt;">Copy of trade license</li>
+                        <li style="font-size:12pt;">Passport &amp; EID copy of Local Owner</li>
+                        <li style="font-size:12pt;">Passport, Visa &amp; EID copy of authorized signatory on behalf of the company</li>
+                        <li style="font-size:12pt;">Copy of VAT Registration Certificate</li>
+                    </ol>
+
+                    <table style="width:95%; margin-left:auto; margin-right:auto; border-collapse: collapse; border-left: 1px solid black; border-right: 1px solid black;  border-top: 1px solid black;  border-bottom: 1px solid black; font-size:12pt"
+                           class="table-borderless">
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td >
+                                <p style="text-align:center;">For Office Use Only</p>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="padding-right:5px; padding-left:5px;">Credit Limit in AED</td>
+                            <td style="padding-right:5px; padding-left:5px;"><span t-field="o.credit_limit"/>
+                            </td>
+                            <td style="padding-right:5px; padding-left:5px;">Credit Period</td>
+                            <td style="padding-right:5px; padding-left:5px;"><span t-field="o.credit_period"/>
+                            </td>
+                            <td style="padding-right:5px; padding-left:5px;">Days</td>
+                            <td style="padding-right:5px; padding-left:5px;">
+                                <span t-field="o.days"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right:5px; padding-left:5px; padding-bottom:5px;">Sales Department</td>
+                            <td style="padding-right:5px; padding-left:5px; padding-bottom:5px;"><span t-field="o.sales_department"/>
+                            </td>
+                            <td style="padding-right:5px; padding-left:5px; padding-bottom:5px;">Sales Manager</td>
+                             <td style="padding-right:5px; padding-left:5px; padding-bottom:5px;"><span t-field="o.sales_manager"/>
+                            </td>
+                            <td style="padding-right:5px; padding-left:5px; padding-bottom:5px;">Finance Dept</td>
+                            <td style="padding-right:5px; padding-left:5px; padding-bottom:5px;">
+                                <span t-field="o.finance_dept"/>
+                            </td>
+                        </tr>
+
+                    </table>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

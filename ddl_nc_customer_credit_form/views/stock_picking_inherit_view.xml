@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inheriting the stock.picking form view -->
+        <record id="view_stock_picking_form_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <!-- Adding the 'Redeliver' button inside the oe_button_box -->
+                <xpath expr="//header" position="inside">
+                    <button name="action_redeliver" string="Redeliver" type="object" class="oe_highlight" invisible="(check_return != True) or (state != 'done') or (return_type != 'replacement')"/>
+                </xpath>
+                <xpath expr="//field[@name='location_id']" position="after">
+                    <field name="check_redeliver" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='location_id']" position="after">
+                    <field name="check_redeliver_return" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

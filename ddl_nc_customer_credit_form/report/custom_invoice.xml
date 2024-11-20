@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="ddl_inherit_invoice_template_header" inherit_id="web.external_layout_standard">
+        <!--        <link rel="stylesheet" href="ddl_proposal/static/src/css/style.css"/>-->
+        <xpath expr="//div[@t-attf-class='header o_company_#{company.id}_layout']" position="replace">
+            <div class="header">
+                <div class="row">
+                    <p></p>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('pt-5')]" position="replace">
+            <div>
+
+
+            </div>
+        </xpath>
+        <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']" position="replace">
+            <div t-attf-class="footer o_standard_footer last-page">
+                <div class="row">
+                    <!--                    <p>Prepared By</p><br/>-->
+
+                    <table style="width:100%; font-size:9.5pt;" class="table-borderless">
+                        <tr>
+                            <td style="padding-bottom:10px; font-weight:bold;">
+                                Prepared By
+                            </td>
+                            <td style="padding-bottom:10px; font-weight:bold;">
+                                Verified By
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid black;">
+
+                            <td style="width:65%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:0px; ">
+                                <p style="margin:0;">Please check all goods on delivery and a ffix stamp.</p>
+                            </td>
+                            <td style="width:35%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:0px; border-left: 1px solid black;"
+                                rowspan="3">
+                                Customer Signature
+                                <br/>
+                                <span t-if="o.partner_id.signature_stamp1">
+                                    <!-- Your content when o.signature_stamp1 is not None -->
+                                    <span t-field="o.partner_id.signature_stamp1"
+                                          t-options='{"widget": "image", "height": 80, "width": 80}' alt="Signature"/>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:0px; ">
+                                <p style="margin:0;">Goods Once sold will not be replaced or compensated.</p>
+                            </td>
+
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:0px; ">
+                                <p style="margin:0;">Goods sold on Bonus/special offers will not be taken back</p>
+                            </td>
+
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:0px; ">
+                                <p style="margin:0;">Invoice must be settles as per the agreed credit terms</p>
+                            </td>
+                            <td style="width:35%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:0px; border-left: 1px solid black;"
+                                rowspan="2">
+                                Company Stamp
+                                <br/>
+                                <span t-if="o.partner_id.company_stamp">
+                                    <!-- Your content when o.signature_stamp1 is not None -->
+                                    <span t-field="o.partner_id.company_stamp"
+                                          t-options='{"widget": "image", "height": 80, "width": 80}' alt="Stamp"/>
+                                </span>
+                            </td>
+
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="padding-left:5px; padding-top:5px; padding-right:5px; ">
+                                <p style="margin:0;">Any damage please return goods on the time of delivery itself</p>
+                            </td>
+
+                        </tr>
+                    </table>
+
+
+                </div>
+
+            </div>
+
+        </xpath>
+    </template>
+
+
+    <template id="ddl_inherit_invoice_template" inherit_id="account.report_invoice_document">
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <p style="text-align:center; font-size:30pt; font-weight:bold;">Invoice</p>
+
+                    <br/>
+                    <br/>
+                    <table style="width:100%; height:140px;" class="table-borderless">
+                        <tr>
+                            <td style="width:45%;  border:1px solid; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;">
+                                <p style="font-weight:light;">
+                                    <b><span t-field="o.partner_id"/></b>
+                                    <br/>
+                                    <span t-field="o.partner_id.street"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.city"/>,&#160;<span t-field="o.partner_id.state_id"/>
+                                    <br/>
+                                    <span t-field="o.partner_id.country_id"/>
+                                    <br/>
+                                    Tel:&#160; <span t-field="o.partner_id.mobile"/>&#160;Fax:&#160;<span
+                                        t-field="o.partner_id.fax"/>
+                                    <br/>
+                                    <b>
+                                    TRN:&#160;
+                                    <span t-field="o.partner_id.tax_registration_number"/>
+                                    <br/>
+                                    Place of Supply:&#160;
+                                    </b><br/>
+                                    Page no:&#160;1
+                                </p>
+
+                            </td>
+                            <td style="width:10%;">
+                            </td>
+                            <td style="width:45%;  border:1px solid; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; ">
+                                <p>
+                                    Doc No:&#160;
+                                    <span t-field="o.name"/>
+                                    <br/>
+                                    Date:&#160;
+                                    <span t-field="o.invoice_date"/>
+                                    <br/>
+                                    Ref No:&#160;
+                                    <span t-field="o.payment_reference"/>
+                                    <br/>
+                                    LPO No:&#160;
+                                    <span t-field="o.invoice_origin"/>
+                                    <br/>
+                                </p>
+
+                            </td>
+                        </tr>
+
+                    </table>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <table style="width:100%; font-size:9.5pt;" class="table-borderless">
+
+                        <tr style="border-top: 1px solid black;  border-bottom: 1px solid black; padding-left:0; padding-top:10px; padding-right:0; padding-bottom:10px;">
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px; font-weight:bold;">Code</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">Product</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">Batch</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">Expiry DT</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">VAT %</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">QTY</th>
+                            <th style="width:3%; padding-bottom:5px; padding-top:5px;">Foc</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">Unit Price</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">Dis%</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">Dis.Price</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">Taxable amount</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">VAT Amount</th>
+                            <th style="width:7.69%; padding-bottom:5px; padding-top:5px;">Amount(VAT Included)</th>
+                        </tr>
+                        <t t-foreach="o.invoice_line_ids" t-as="line">
+                            <tr style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;">
+                                <!--                        code-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;">
+                                    <span t-field="line.product_id.default_code"/>
+                                </td>
+                                <!--                        product ID-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;">
+                                    <span t-field="line.product_id.name"/>
+                                </td>
+                                <!--                        Batch-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;">
+                                    <span t-field="line.lot_number"/>
+                                </td>
+                                <!--                        Expiry DT-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;">
+                                    <span t-esc="line.expire_date and line.expire_date.strftime('%Y-%m-%d') or ''"/>
+                                </td>
+
+                                <!--                        VAT%-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center;">
+                                    <span t-field="line.tax_ids"/>
+                                </td>
+                                <!--                        QTY-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center;">
+                                    <span t-field="line.quantity"/>
+                                </td>
+                                <!--                        FOC-->
+                                <td style="width:3%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center; text-align:center;">
+                                    <!--                            <span t-field="line.product_id"/>-->
+                                    <p>0</p>
+                                </td>
+                                <!--                        Unit Price-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center;">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <!--                        Dis%-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center;">
+                                    <span t-field="line.discount"/>
+                                </td>
+                                <!--                        Dis Price-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center;">
+                                    <span t-field="line.discount_amount"/>
+                                </td>
+                                <!--                        Taxable Amount-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center;">
+                                    <span t-field="line.price_subtotal"/>
+                                </td>
+                                <!--                        VAT Amount-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center;">
+                                    <span t-field="line.vat_amount"/>
+                                </td>
+                                <!--                        Amount(VAT Included)-->
+                                <td style="width:7.69%; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; text-align:center;">
+                                    <span t-field="line.price_total"/>
+                                </td>
+
+                            </tr>
+                        </t>
+                        <tr style="border-top: 1px solid black;  border-bottom: 1px solid black; padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;">
+                            <td>
+                                &#160;
+
+                            </td>
+
+
+                            <td>
+                                &#160;
+
+                            </td>
+
+                            <td>
+                                &#160;
+
+                            </td>
+
+                            <td>
+                                &#160;
+
+                            </td>
+
+                            <td>
+                                &#160;
+
+                            </td>
+
+                            <td>
+                                &#160;
+
+                            </td>
+
+                            <td>
+                                &#160;
+
+                            </td>
+
+                            <td>
+                                &#160;
+
+                            </td>
+
+                            <td>
+                                &#160;
+
+                            </td>
+
+                            <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; font-weight:bold;">
+                                Total
+
+                            </td>
+
+                            <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; font-weight:bold; text-align:center;">
+                                <span t-field="o.amount_untaxed"/>
+
+                            </td>
+
+                            <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; font-weight:bold; text-align:center;">
+                                <span t-field="o.amount_tax"/>
+
+                            </td>
+
+
+                            <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px; font-weight:bold; text-align:center;">
+                                <span t-field="o.amount_total"/>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    <p style="font-size:11pt; margin:0;">
+                        Tax amount&#160;:&#160;UAE Dirhams&#160;<span t-field="o.amount_tax_word"/>&#160;Only
+                    </p>
+                    <p style="font-size:11pt; margin:0;">
+                        <b>Total amount&#160;:&#160;UAE Dirhams&#160;<span t-field="o.amount_total_word"/>&#160;Only</b>
+                    </p><br/>
+                    <p style="font-size:11pt; margin:0;">
+                        <b>Note&#160;:&#160;</b>Payment Shall be made in favor of 'NOVACARE GENERAL TRADING LLC' only
+                    </p>
+
+
+                    <br/>
+                    <br/>
+
+                    <table>
+                        <div class="row">
+                            <table style="float:left; font-size:11pt;" class="table-borderless">
+                                <td> &#160;</td>
+                                <td>
+
+                                </td>
+                            </table>
+                            <table class="table-borderless" style="float:right; font-size:11pt;">
+                                <td>&#160;</td>
+                                <td>
+
+                                </td>
+                            </table>
+                        </div>
+                    </table>
+
+
+                </div>
+
+
+            </t>
+        </xpath>
+    </template>
+</odoo>

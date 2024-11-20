@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Modify the existing form view for CRM Lead -->
+        <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Add the visit_date field after team_id -->
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="visit_date"/>
+                </xpath>
+                <xpath expr="//field[@name='lang_id']" position="after">
+                    <field name="visit_date"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="quick_create_opportunity_form_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.form.quick_create.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+            <field name="arch" type="xml">
+                <!-- Add the visit_date field after phone -->
+                <xpath expr="//field[@name='phone']" position="after">
+                    <field name="visit_date"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

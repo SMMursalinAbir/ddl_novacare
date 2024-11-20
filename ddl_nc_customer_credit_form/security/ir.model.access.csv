@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_brand,access_product_brand,model_product_brand,,1,1,1,1
+access_sold_item,access_sold_item,model_sold_item,,1,1,1,1
+access_lead_details,access_lead_details,model_lead_details,,1,1,1,1
+access_salesperson_target,access_salesperson_target,model_salesperson_target,,1,1,1,1
+access_stock_product_return,access_stock_product_return,model_stock_product_return,,1,1,1,1
+access_generate_product_return_report,access_generate_product_return_report,model_generate_product_return_report,,1,1,1,1
+access_res_partner_visit,access_res_partner_visit,model_res_partner_visit,,1,1,1,1
+

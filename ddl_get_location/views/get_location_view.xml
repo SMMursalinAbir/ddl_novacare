@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Find the existing field in the form view using XPath -->
+        <record id="view_crm_lead_form_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- Locate the field with the name tag_ids -->
+                    <xpath expr="//notebook" position="inside">
+                        <page name="visit_status" string="Visit Status">
+                            <group col="2">
+                                <group>
+                                    <field name="visit_status"/>
+                                    <button name="get_partner_location" string="Get Salesperson Location" type="object"
+                                            class="oe_highlight"/>
+                                </group>
+                                <group>
+                                    <field name="salesperson_latitude"/>
+                                    <field name="salesperson_longitude"/>
+                                </group>
+                            </group>
+                        </page>
+                    </xpath>
+                    <xpath expr="//div[@class='oe_button_box']" position="inside">
+                        <button name="action_map" string="Map" type="object" class="oe_stat_button" icon="fa-map-marker"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

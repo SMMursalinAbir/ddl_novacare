@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_return_picking_form_inherited" model="ir.ui.view">
+        <field name="name">Stock Return Wizard Inherit</field>
+        <field name="model">stock.return.picking</field>
+        <field name="inherit_id" ref="stock.view_stock_return_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_id']" position="after">
+                <field name="return_reason"/>
+                <field name="return_type"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_picking_form_inherited" model="ir.ui.view">
+        <field name="name">Stock Picking Form - Inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="check_return" invisible="1"/>
+                <field name="return_reason" invisible="check_return != True"/>
+                <field name="return_type" invisible="check_return != True"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_picking_tree_inherited" model="ir.ui.view">
+        <field name="name">Stock Picking Tree - Inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="check_return" invisible="1"/>
+                <field name="return_reason" optional="hide"/>
+                <field name="return_type" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_show_returns" model="ir.actions.act_window">
+        <field name="name">Returns</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('picking_type_id.name', '=', 'Returned')]</field>
+    </record>
+
+    <menuitem id="returns_menu" name="Returns" parent="stock.menu_stock_transfers"
+                  action="action_show_returns" sequence="30"
+                  groups="stock.group_stock_manager,stock.group_stock_user"/>
+</odoo>
